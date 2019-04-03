@@ -5,7 +5,9 @@ import java.util.Comparator;
 import java.util.IntSummaryStatistics;
 import java.util.function.Function;
 import java.util.function.ToIntFunction;
+import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class CustomStreamUtil {
 
@@ -40,6 +42,18 @@ public class CustomStreamUtil {
   public static <T> IntSummaryStatistics getStats(Collection<T> collection, ToIntFunction<T> intFunction) {
     return collection.stream()
         .collect(Collectors.summarizingInt(intFunction));
+  }
+
+  /**
+   * Build a stream using iterate
+   * @param seed
+   * @param unaryOperator
+   * @param limit
+   * @param <T>
+   * @return Stream of T based on seed and unaryOperator, the size of the stream is limit
+   */
+  public static <T> Stream<T> streamIterate(T seed, UnaryOperator<T> unaryOperator, int limit) {
+    return Stream.iterate(seed, unaryOperator).limit(limit);
   }
 
 }
