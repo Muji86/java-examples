@@ -1,5 +1,6 @@
 package com.example.muji.stream;
 
+import com.example.muji.validation.Person;
 import lombok.Builder;
 import lombok.Data;
 import org.junit.Before;
@@ -86,11 +87,4 @@ public class CustomStreamUtilTest {
     assertEquals("Person_11111", collect.get(4).getName());
 
   }
-}
-
-@Data
-@Builder
-class Person {
-  private String name;
-  private int age;
 }
