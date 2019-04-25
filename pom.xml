@@ -17,6 +17,51 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+
+            <!--Generate POJO from xsd-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>jaxb2-maven-plugin</artifactId>
+                <version>2.3</version>
+                <executions>
+                    <execution>
+                        <id>xjc</id>
+                        <goals>
+                            <goal>xjc</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <xjbSources>
+                        <xjbSource>src/main/resources/xjb/car-schema.xjb</xjbSource>
+                    </xjbSources>
+                    <sources>
+                        <source>src/main/resources/xsd/car-schema.xsd</source>
+                    </sources>
+                    <outputDirectory>${build.directory}/generated-sources/</outputDirectory>
+                    <packageName>com.example.muji.pojo.xml</packageName>
+                    <clearOutputDir>true</clearOutputDir>
+                </configuration>
+            </plugin>
+
+            <!--Generate POJO from JSON-->
+            <!--<plugin>-->
+                <!--<groupId>org.jsonschema2pojo</groupId>-->
+                <!--<artifactId>jsonschema2pojo-maven-plugin</artifactId>-->
+                <!--<version>1.0.1</version>-->
+                <!--<configuration>-->
+                    <!--<sourceDirectory>${project.basedir}/src/main/resources/json</sourceDirectory>-->
+                    <!--<targetPackage>com.test.pojo</targetPackage>-->
+                <!--</configuration>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<goals>-->
+                            <!--<goal>generate</goal>-->
+                        <!--</goals>-->
+                        <!--<phase>process-sources</phase>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
     <dependencies>
@@ -72,6 +117,12 @@
             <artifactId>assertj-core</artifactId>
             <version>3.12.2</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>2.5.4</version>
         </dependency>
 
     </dependencies>

@@ -1,10 +1,16 @@
 package com.example.muji.date;
 
+import org.assertj.core.util.DateUtil;
 import org.junit.Before;
 import org.junit.Test;
 
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,6 +55,36 @@ public class CustomDateUtilTest {
 
     // Then
     assertEquals("2019-02-13 12:23:12", format);
+  }
+
+  @Test
+  public void convertLocalDateToXmlGregorianDate_test() throws DatatypeConfigurationException {
+    // Given
+    LocalDate localDate = LocalDate.of(2019, 4, 3);
+
+    // When
+    XMLGregorianCalendar xmlGregorianCalendar = CustomDateUtil.convert(localDate, XMLGregorianCalendar.class);
+
+    // Then
+    assertEquals(2019, xmlGregorianCalendar.getYear());
+    assertEquals(4, xmlGregorianCalendar.getMonth());
+    assertEquals(3, xmlGregorianCalendar.getDay());
+
+  }
+
+  @Test
+  public void convertZonedLocalDateToXmlGregorianDate_test() throws DatatypeConfigurationException {
+    // Given
+    LocalDateTime localDateTime = LocalDateTime.of(2019, 4, 3, 10, 10, 10);
+    ZonedDateTime zonedDateTime = ZonedDateTime.of(localDateTime, ZoneOffset.UTC);
+
+    // When
+    XMLGregorianCalendar xmlGregorianCalendar = CustomDateUtil.convert(zonedDateTime, XMLGregorianCalendar.class);
+
+    // Then
+    assertEquals(2019, xmlGregorianCalendar.getYear());
+    assertEquals(4, xmlGregorianCalendar.getMonth());
+    assertEquals(3, xmlGregorianCalendar.getDay());
   }
 
 }

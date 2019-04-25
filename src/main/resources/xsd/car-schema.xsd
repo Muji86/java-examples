@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema version="02.05" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="Car" type="CarType" />
+    <xs:complexType name="CarType">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="Reg" type="RegType" />
+            <xs:element minOccurs="1" maxOccurs="1" name="Make" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="Model" type="xs:string" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="RegType">
+        <xs:sequence>
+            <xs:element minOccurs="1" maxOccurs="1" name="RegistrationNumber" type="xs:string" />
+            <xs:element minOccurs="1" maxOccurs="1" name="RegistrationDate" type="RegDate" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="RegDate">
+        <xs:restriction base="xs:date">
+            <xs:pattern value="yyyy-MM-dd" />
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
